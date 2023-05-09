@@ -1,9 +1,9 @@
 package controller;
 
-public class DefaultHandler implements Chain{
-    private Chain nextInChain;
+public class DefaultHandler implements IChain {
+    private IChain nextInIChain;
     @Override
-    public void setNext(Chain nextChain) {
+    public void setNext(IChain nextIChain) {
       //
     }
 

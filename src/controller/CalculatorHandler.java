@@ -3,8 +3,8 @@ package controller;
 public abstract class CalculatorHandler {
     protected CalculatorHandler nextHandler;
 
-    public void setNext(CalculatorHandler handler) {
-        nextHandler = handler;
+    public void setNext(final CalculatorHandler handler) {
+        this.nextHandler = handler;
     }
 
     public abstract double handle(String operation);

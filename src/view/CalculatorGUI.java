@@ -1,39 +1,37 @@
 package view;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import controller.Calculator;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class CalculatorGUI {
+public class CalculatorGUI extends JFrame{
+        JPanel panel;
+        JTextField textField;
+        JLabel resultLabel;
 
     public CalculatorGUI() {
-        JFrame frame = new JFrame("Calculator");
-        JPanel panel = new JPanel();
+        this.panel = new JPanel();
 
-        JTextField textField = new JTextField(20);
-        JLabel resultLabel = new JLabel("Result: 0.00");
+        this.textField = new JTextField(20);
+        this.resultLabel = new JLabel("Result: 0.00000");
 
-        JButton calculateButton = new JButton("Calculate");
+        final JButton calculateButton = new JButton("Calculate");
         calculateButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                Calculator calculator = new Calculator();
-                calculator.calculate(textField.getText());
-                resultLabel.setText("Result: " + Double.toString(calculator.getResult()));
+            public void actionPerformed(final ActionEvent e) {
+                final Calculator calculator = new Calculator();
+                calculator.calculate(CalculatorGUI.this.textField.getText());
+                CalculatorGUI.this.resultLabel.setText("Result: " + Double.toString(calculator.getFloatResult()));
             }
         });
 
-        panel.add(textField);
-        panel.add(calculateButton);
-        panel.add(resultLabel);
+        this.panel.add(this.textField);
+        this.panel.add(calculateButton);
+        this.panel.add(this.resultLabel);
 
-        frame.add(panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        add(this.panel);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 }
