@@ -1,7 +1,6 @@
 import view.CalculatorGUI;
 
-public enum App {
-    ;
+public class App {
 
     public static void main(String[] args) {
         new CalculatorGUI();

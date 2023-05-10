@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class SubtractionHandler implements IChain {
 
     private IChain nextInIChain;
@@ -10,12 +13,13 @@ public class SubtractionHandler implements IChain {
     }
 
     @Override
-    public double handle(final String operation) {
-        if (operation.contains("-") && !operation.startsWith("-") && !operation.contains("--")) {
-            final String[] operands = operation.split("\\-");
-            double result = nextInIChain.handle(operands[0]);
-            for (int i = 1; i < operands.length; i++) {
-                result -= nextInIChain.handle(operands[i]);
+    public double handle(String operation) {
+            double result;
+        if (operation.contains("-")) {
+            ArrayList<String> operands = new ArrayList<>(Arrays.asList(operation.split("(?<=\\d)-")));
+            result = nextInIChain.handle(operands.get(0));
+            for (int i = 1; i < operands.size(); i++) {
+                result -= nextInIChain.handle(operands.get(i));
             }
             return result;
         } else {

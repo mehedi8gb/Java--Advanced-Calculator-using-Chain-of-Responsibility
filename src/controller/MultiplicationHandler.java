@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class MultiplicationHandler implements IChain {
 
     private IChain nextInIChain;
@@ -10,16 +13,25 @@ public class MultiplicationHandler implements IChain {
     }
 
     @Override
-    public double handle(final String operation) {
+    public double handle(String operation) {
         if (operation.contains("*")) {
-            final String[] operands = operation.split("\\*");
-            double result = nextInIChain.handle(operands[0]);
-            for (int i = 1; i < operands.length; i++) {
-                result *= nextInIChain.handle(operands[i]);
+         ArrayList<String> operands = new ArrayList<>(Arrays.asList(operation.split("\\*")));
+            if(operands.get(0).matches("\\*-")){
+               operands.remove(0);
+               operands.set(0, String.valueOf(Double.parseDouble(operands.get(1)) * -1));
+               nextInIChain.handle(operands.toString());
+            }
+            double result = nextInIChain.handle(operands.get(0));
+            for (int i = 1; i < operands.size(); i++) {
+//            if (operands.contains("*-")) {
+//                nextInIChain.handle(String.valueOf(Double.parseDouble(operands.get(operands.indexOf("*-") + 1)) * -1));
+//            }
+                result *= nextInIChain.handle(operands.get(i));
             }
             return result;
         } else {
             return this.nextInIChain.handle(operation);
         }
     }
+
 }

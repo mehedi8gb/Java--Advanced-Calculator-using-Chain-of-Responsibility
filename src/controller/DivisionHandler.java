@@ -8,12 +8,13 @@ public class DivisionHandler implements IChain {
     private IChain nextInIChain;
 
     @Override
-    public void setNext(IChain nextIChain) {
+    public void setNext(final IChain nextIChain) {
         this.nextInIChain = nextIChain;
     }
 
     @Override
     public double handle(String operation) {
+
         if (operation.contains("/")) {
             String[] equations = operation.split("\\s+");
             List<String> remainingEquations = new ArrayList<>();
@@ -41,4 +42,6 @@ public class DivisionHandler implements IChain {
             return this.nextInIChain.handle(operation);
         }
     }
+
+
 }
