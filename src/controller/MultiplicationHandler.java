@@ -23,9 +23,6 @@ public class MultiplicationHandler implements IChain {
             }
             double result = nextInIChain.handle(operands.get(0));
             for (int i = 1; i < operands.size(); i++) {
-//            if (operands.contains("*-")) {
-//                nextInIChain.handle(String.valueOf(Double.parseDouble(operands.get(operands.indexOf("*-") + 1)) * -1));
-//            }
                 result *= nextInIChain.handle(operands.get(i));
             }
             return result;

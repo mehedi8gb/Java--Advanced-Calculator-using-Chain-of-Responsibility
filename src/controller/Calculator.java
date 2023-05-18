@@ -3,6 +3,7 @@ package controller;
 import javax.swing.*;
 
 public class Calculator {
+    IChain trigonometryHandler;
     IChain BraceHandler;
     IChain powerHandler;
     IChain UnArrayHandler;
@@ -24,20 +25,22 @@ public class Calculator {
         this.multiplicationHandler = new MultiplicationHandler();
         this.additionHandler = new AdditionHandler();
         this.subtractionHandler = new SubtractionHandler();
+        this.trigonometryHandler = new TrigonometryHandler();
 
         // define the chain of responsibility
         this.BraceHandler.setNext(this.UnArrayHandler);
-        this.UnArrayHandler.setNext(this.additionHandler);
+        this.UnArrayHandler.setNext(this.trigonometryHandler);
+        this.trigonometryHandler.setNext(this.additionHandler);
         this.additionHandler.setNext(this.subtractionHandler);
         this.subtractionHandler.setNext(this.multiplicationHandler);
         this.multiplicationHandler.setNext(this.divisionHandler);
         this.divisionHandler.setNext(this.powerHandler);
         this.powerHandler.setNext(this.defaultHandler);
     }
-    // calculate the result of the input
-    public Double calculate(String input) {
-            this.result = this.BraceHandler.handle(validateInput(input));
-            System.out.println(input + " = " + this.result);
+    // calculate the result of the expression
+    public Double calculate(String expression) {
+            this.result = this.BraceHandler.handle(expression);
+            System.out.println(expression + " = " + this.result);
         return this.result;
     }
 
@@ -45,14 +48,7 @@ public class Calculator {
      regex to filter only number and operator to make decision its valid input or not,
      and show error message
     */
-private String validateInput(final String input) {
-    if (input.matches("^[0-9\\+\\-*\\/\\^\\(\\).\\s]+$")) {
-        return input.replaceAll("\\s+", "");
-    } else {
-        showErrorMessage("Invalid input");
-        return null; // or throw an exception, depending on your requirements
-    }
-}
+
 
 
     //    show error message
