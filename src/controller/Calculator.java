@@ -1,5 +1,7 @@
 package controller;
 
+import request.Request;
+
 import javax.swing.*;
 
 public class Calculator {
@@ -25,7 +27,7 @@ public class Calculator {
         this.multiplicationHandler = new MultiplicationHandler();
         this.additionHandler = new AdditionHandler();
         this.subtractionHandler = new SubtractionHandler();
-        this.trigonometryHandler = new TrigonometryHandler();
+        this.trigonometryHandler = new FunctionsHandler();
 
         // define the chain of responsibility
         this.BraceHandler.setNext(this.UnArrayHandler);
@@ -39,7 +41,7 @@ public class Calculator {
     }
     // calculate the result of the expression
     public Double calculate(String expression) {
-            this.result = this.BraceHandler.handle(expression);
+            this.result = this.BraceHandler.handle(Request.validateInput(expression));
             System.out.println(expression + " = " + this.result);
         return this.result;
     }
