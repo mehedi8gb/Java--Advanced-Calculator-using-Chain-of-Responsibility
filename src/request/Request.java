@@ -1,17 +1,25 @@
 package request;
 
+import java.util.regex.*;
 import controller.Calculator;
 
 public class Request {
 
-    public static String validateInput(final String input) {
-    if (input.matches("^[0-9\\+\\-*\\/\\^\\(\\).\\s]+$")) {
+
+public static String validateInput(final String input) {
+    String regexPattern = "^\\s*(?:\\d+(?:\\.\\d+)?|sin|cos|tan)\\s*(?:[-+*/]\\s*(?:\\d+(?:\\.\\d+)?|sin|cos|tan)\\s*)*$";
+    Pattern pattern = Pattern.compile(regexPattern);
+    Matcher matcher = pattern.matcher(input);
+
+    if (matcher.matches()) {
         return input.replaceAll("\\s+", "");
     } else {
-        Calculator.showErrorMessage("Invalid input");
+        Calculator.showErrorMessage(Calculator.ERROR_MESSAGE);
         return null; // or throw an exception, depending on your requirements
     }
 }
+
+
 
 // public static String validate(String expression) {
 //    if (expression.matches("^[\\d+\\-*/^()\\s]+$")) {

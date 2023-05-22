@@ -5,38 +5,38 @@ import request.Request;
 import javax.swing.*;
 
 public class Calculator {
-    IChain trigonometryHandler;
+    IChain functionsHandler;
     IChain BraceHandler;
     IChain powerHandler;
-    IChain UnArrayHandler;
+    IChain UnaryHandler;
     IChain subtractionHandler;
     IChain defaultHandler;
     IChain additionHandler;
     IChain divisionHandler;
     IChain multiplicationHandler;
+    public static final String ERROR_MESSAGE = "Invalid input";
     private Double result;
-
 
     public Calculator() {
         // initialize the chain of responsibility
         this.BraceHandler = new BraceHandler();
         this.defaultHandler = new DefaultHandler();
         this.powerHandler = new PowerHandler();
-        this.UnArrayHandler = new UnaryHandler();
+        this.UnaryHandler = new UnaryHandler();
         this.divisionHandler = new DivisionHandler();
         this.multiplicationHandler = new MultiplicationHandler();
         this.additionHandler = new AdditionHandler();
         this.subtractionHandler = new SubtractionHandler();
-        this.trigonometryHandler = new FunctionsHandler();
+        this.functionsHandler = new FunctionsHandler();
 
         // define the chain of responsibility
-        this.BraceHandler.setNext(this.UnArrayHandler);
-        this.UnArrayHandler.setNext(this.trigonometryHandler);
-        this.trigonometryHandler.setNext(this.additionHandler);
+        this.BraceHandler.setNext(this.UnaryHandler);
+        this.UnaryHandler.setNext(this.additionHandler);
         this.additionHandler.setNext(this.subtractionHandler);
         this.subtractionHandler.setNext(this.multiplicationHandler);
         this.multiplicationHandler.setNext(this.divisionHandler);
-        this.divisionHandler.setNext(this.powerHandler);
+        this.divisionHandler.setNext(this.functionsHandler);
+        this.functionsHandler.setNext(this.powerHandler);
         this.powerHandler.setNext(this.defaultHandler);
     }
     // calculate the result of the expression
@@ -60,7 +60,7 @@ public class Calculator {
 
     // convert double to float to avoid precision errors
     public float getFloatResult() {
-        return result.floatValue();
+        return this.result.floatValue();
     }
 
 }

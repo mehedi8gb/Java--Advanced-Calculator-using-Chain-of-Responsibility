@@ -11,8 +11,8 @@ public class CalculatorTest {
 
         Calculator calc = new Calculator();
 
-//        assertEquals(0.589, calc.calculate("sin(60)+sin(90)"), 0.001);
-        assertEquals(0, calc.calculate("(-1+2+(1-2))"));
+        assertEquals(0, calc.calculate("-1+2+(1-2)"));
+        assertEquals(0.589, calc.calculate("sin(60)+sin(90)"), 0.001);
         assertEquals(1073.875, calc.calculate("(((2 + 4 * 3) - 8 / 2) ^ 3) + ((5 - 1) * (7 + 9) - 2) / (4 ^ 2) + ((10 - 2) ^ 2 + 3 * (8 / 4))\n"));
         assertEquals(-3371.33333333, calc.calculate("(1+2+(1-2+(5+5-(6-6+(50+40*(10*50/6))))))"), 0.000001);
         assertEquals(-25, calc.calculate("1-5^2-1"));

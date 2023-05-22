@@ -13,9 +13,7 @@ public class SinHandler implements TChain{
     public double handle(String expression) {
         if (expression.contains("sin")) {
             String[] expressionArray = expression.split("sin");
-            double deg = Math.toRadians(this.nextInTChain.handle(expressionArray[1]));
-            double value = Math.sin(deg);
-            return Math.round(value);
+            return Math.sin(this.nextInTChain.handle(expressionArray[1]));
         }
         return nextInTChain.handle(expression);
     }
