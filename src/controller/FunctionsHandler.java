@@ -1,6 +1,6 @@
 package controller;
 
-import TrigonoChain.Magic;
+import FunctionsChain.Functions;
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -9,11 +9,11 @@ import java.util.regex.Matcher;
 public class FunctionsHandler implements IChain {
 
     private IChain nextInIChain;
-    private Magic TChain;
+    private Functions TChain;
 
 
        public FunctionsHandler() {
-           this.TChain = new Magic();
+           this.TChain = new Functions();
        }
 
     @Override
@@ -31,12 +31,12 @@ public class FunctionsHandler implements IChain {
 
             while (matcher.find()) {
                 String match = matcher.group();
-                double value = TChain.startTChain(match);
+                double value = TChain.startFunctionsChain(match);
                 // Replace in the new variable
                 replacedExpression = replacedExpression.replaceAll(match, String.valueOf(value));
             }
 
-            return TChain.startTChain(replacedExpression); // Use the replaced expression
+            return TChain.startFunctionsChain(replacedExpression); // Use the replaced expression
         } else {
             return nextInIChain.handle(expression);
         }

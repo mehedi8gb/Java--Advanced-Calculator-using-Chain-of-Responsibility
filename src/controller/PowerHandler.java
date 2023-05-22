@@ -14,9 +14,9 @@ public class PowerHandler implements IChain{
             nextInIChain.handle(operation);
         if (operation.contains("^")) {
             final String[] operands = operation.split("\\^");
-//            double result = nextInIChain.handle(operands[0]);
             for (String operand : operands) {
-                this.result = Math.pow(Double.parseDouble(operands[0]), Double.parseDouble(operands[1]));
+                this.result = Math.pow(this.nextInIChain.handle(String.valueOf(Double.parseDouble(operands[0]))),
+                        this.nextInIChain.handle(String.valueOf(Double.parseDouble(operands[1]))));
             }
             return this.result;
         } else {

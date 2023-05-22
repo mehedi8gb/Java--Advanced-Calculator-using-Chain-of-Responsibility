@@ -1,8 +1,8 @@
-package TrigonoChain;
+package FunctionsChain;
 
-public class DefaultHandler implements TChain{
+public class DefaultHandler implements FChain {
     @Override
-    public void setNext(TChain nextTChain) {
+    public void setNext(FChain nextFChain) {
         // TODO Auto-generated method stub
     }
 
