@@ -10,11 +10,9 @@ public class TanHandler implements TChain{
 
     @Override
     public double handle(String expression) {
-        String[] expressionArray = expression.split("tan(\\(|)");
-        if (expressionArray[0].equals("tan")) {
-            double deg = Math.toRadians(this.nextInTChain.handle(expressionArray[1]));
-            double value = Math.tan(deg);
-            return Math.round(value);
+      if (expression.contains("tan")) {
+            String[] expressionArray = expression.split("tan");
+            return Math.tan(this.nextInTChain.handle(expressionArray[1]));
         }
         return nextInTChain.handle(expression);
     }
