@@ -23,7 +23,7 @@ public class FunctionsHandler implements IChain {
     }
     public double handle(String expression) {
         // Added ".*" to match the entire expression
-        if (expression.matches("(sin|cos|tan|cosec|sec|cot).*")) {
+        if (expression.matches("(sin|cos|tan).*")) {
             String functionRegex = "(\\w+\\(\\d+(\\.\\d+)?\\))";
             Matcher matcher = Pattern.compile(functionRegex).matcher(expression);
             // Initialize a new variable to store the replaced expression
