@@ -41,7 +41,8 @@ public class Calculator {
     }
     // calculate the result of the expression
     public Double calculate(String expression) {
-            this.result = this.BraceHandler.handle(Request.validateInput(expression));
+//            this.result = this.BraceHandler.handle(Request.validated(expression));
+            this.result = this.BraceHandler.handle(expression);
             System.out.println(expression + " = " + this.result);
         return this.result;
     }

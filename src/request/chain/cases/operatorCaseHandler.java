@@ -1,16 +1,18 @@
-package request.cases;
+package request.chain.cases;
 
-import request.IRequest;
+import exception.CalculatorExceptions;
+import request.chain.IRequest;
 
 public class operatorCaseHandler implements IRequest {
     private IRequest nextInIRequest;
+
     @Override
     public void setNext(IRequest nextIRequest) {
         this.nextInIRequest = nextIRequest;
     }
 
     @Override
-    public String handle(String expression) {
-        return null;
+    public String handle(String expression) throws CalculatorExceptions {
+        return expression;
     }
 }
