@@ -1,19 +1,24 @@
 package TrigonoChain;
 
+import controller.Calculator;
+import controller.IChain;
+
 public class CosHandler implements TChain {
-        private TChain nextInTChain;
+    private IChain nextInIChain;
+    private TChain nextInTChain;
 
     @Override
-    public void setNext(TChain nextTChain) {
-    this.nextInTChain = nextTChain;
+    public void setNext(TChain nextTChain, IChain nextInIChain) {
+        this.nextInIChain = nextInIChain;
+        this.nextInTChain = nextTChain;
     }
 
     @Override
-    public double handle(String expression) {
-        if (expression.contains("cos")) {
-            String[] expressionArray = expression.split("cos");
-            return Math.cos(this.nextInTChain.handle(expressionArray[1]));
+    public double handle(String functionName, String value) {
+        if (functionName.equals("cos")) {
+            return Math.cos(this.nextInIChain.handle(value));
         }
-        return nextInTChain.handle(expression);
+
+        return nextInTChain.handle(functionName, value);
     }
 }

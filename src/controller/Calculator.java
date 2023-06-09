@@ -1,66 +1,72 @@
 package controller;
 
-import request.Request;
+import sys.Context;
 
 import javax.swing.*;
 
 public class Calculator {
-    IChain functionsHandler;
+    IChain FunctionsHandler;
     IChain BraceHandler;
-    IChain powerHandler;
+    IChain PowerHandler;
     IChain UnaryHandler;
-    IChain subtractionHandler;
-    IChain defaultHandler;
-    IChain additionHandler;
-    IChain divisionHandler;
-    IChain multiplicationHandler;
+    IChain SubtractionHandler;
+    IChain DefaultHandler;
+    IChain AdditionHandler;
+    IChain DivisionHandler;
+    IChain MultiplicationHandler;
     public static final String ERROR_MESSAGE = "Invalid input";
     private Double result;
 
     public Calculator() {
         // initialize the chain of responsibility
         this.BraceHandler = new BraceHandler();
-        this.defaultHandler = new DefaultHandler();
-        this.powerHandler = new PowerHandler();
+        this.DefaultHandler = new DefaultHandler();
+        this.PowerHandler = new PowerHandler();
         this.UnaryHandler = new UnaryHandler();
-        this.divisionHandler = new DivisionHandler();
-        this.multiplicationHandler = new MultiplicationHandler();
-        this.additionHandler = new AdditionHandler();
-        this.subtractionHandler = new SubtractionHandler();
-        this.functionsHandler = new FunctionsHandler();
+        this.DivisionHandler = new DivisionHandler();
+        this.MultiplicationHandler = new MultiplicationHandler();
+        this.AdditionHandler = new AdditionHandler();
+        this.SubtractionHandler = new SubtractionHandler();
+        this.FunctionsHandler = new FunctionsHandler(this);
 
         // define the chain of responsibility
+        this.FunctionsHandler.setNext(this.BraceHandler);
         this.BraceHandler.setNext(this.UnaryHandler);
-        this.UnaryHandler.setNext(this.additionHandler);
-        this.additionHandler.setNext(this.subtractionHandler);
-        this.subtractionHandler.setNext(this.multiplicationHandler);
-        this.multiplicationHandler.setNext(this.divisionHandler);
-        this.divisionHandler.setNext(this.functionsHandler);
-        this.functionsHandler.setNext(this.powerHandler);
-        this.powerHandler.setNext(this.defaultHandler);
+        this.UnaryHandler.setNext(this.AdditionHandler);
+        this.AdditionHandler.setNext(this.SubtractionHandler);
+        this.SubtractionHandler.setNext(this.MultiplicationHandler);
+        this.MultiplicationHandler.setNext(this.DivisionHandler);
+        this.DivisionHandler.setNext(this.PowerHandler);
+        this.PowerHandler.setNext(this.DefaultHandler);
     }
-    // calculate the result of the expression
-    public Double calculate(String expression) {
-            this.result = this.BraceHandler.handle(Request.validateInput(expression));
-            System.out.println(expression + " = " + this.result);
+
+    /**
+     * Calculate double.
+     * calculate the result of the expression
+     *
+     * @param expression the expression
+     * @return the double
+     */
+    public double calculate(String expression) {
+          if (Context.shouldContinue()) {
+            try {
+//                String validated = new Request().validateRequest(expression);
+                this.result = this.FunctionsHandler.handle(expression);
+            } catch (Exception e) {
+                Context.setFlag(false);
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+          }
         return this.result;
     }
-
-    /*
-     regex to filter only number and operator to make decision its valid input or not,
-     and show error message
-    */
-
-
-
-    //    show error message
-    public static void showErrorMessage(final String message) {
-        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
     // convert double to float to avoid precision errors
     public float getFloatResult() {
         return this.result.floatValue();
+    }
+
+    public double runChainAgain(String expression){
+       return this.FunctionsHandler.handle(expression);
     }
 
 }

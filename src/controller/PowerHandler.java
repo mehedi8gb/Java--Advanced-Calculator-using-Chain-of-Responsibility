@@ -1,22 +1,22 @@
 package controller;
 
-public class PowerHandler implements IChain{
+import sys.Context;
+
+public class PowerHandler implements IChain {
     private IChain nextInIChain;
-                private double result;
+    private double result;
+
     @Override
     public void setNext(final IChain nextIChain) {
         this.nextInIChain = nextIChain;
     }
 
     @Override
-     public double handle(String operation) {
-        if (operation.contains("*-"))
-            nextInIChain.handle(operation);
-        if (operation.contains("^")) {
+    public double handle(String operation) {
+        if (operation.contains("^") && Context.shouldContinue()) {
             final String[] operands = operation.split("\\^");
-//            double result = nextInIChain.handle(operands[0]);
-            for (String operand : operands) {
-                this.result = Math.pow(Double.parseDouble(operands[0]), Double.parseDouble(operands[1]));
+            for (int i = 0; i < operands.length - 1; i++) {
+                this.result = Math.pow(Double.parseDouble(operands[i]), Double.parseDouble(operands[i + 1]));
             }
             return this.result;
         } else {

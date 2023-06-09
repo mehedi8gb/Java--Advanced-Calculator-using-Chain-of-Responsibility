@@ -2,7 +2,7 @@ package request.cases;
 
 import request.IRequest;
 
-public class functionCaseHandler  implements IRequest {
+public class OperandCaseHandler implements IRequest {
     private IRequest nextInIRequest;
     @Override
     public void setNext(IRequest nextIRequest) {
@@ -11,6 +11,9 @@ public class functionCaseHandler  implements IRequest {
 
     @Override
     public String handle(String expression) {
-        return null;
+//        if (expression.matches("\s")){
+//            expression = expression.replaceAll("\\s", "");
+//        }
+        return expression;
     }
 }

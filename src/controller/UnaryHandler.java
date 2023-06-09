@@ -1,5 +1,9 @@
 package controller;
 
+import sys.Context;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,6 +11,7 @@ public class UnaryHandler implements IChain {
     // TODO: Implement the handle method
     private IChain nextInChain;
     private boolean flag = true;
+    private double result = 0.0;
 
     @Override
     public void setNext(final IChain nextIChain) {
@@ -15,16 +20,19 @@ public class UnaryHandler implements IChain {
 
     @Override
     public double handle(String operation) {
-        final String regex = "(\\+\\+)|(--)|(\\+-)|(-\\+)";
-        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        final Matcher matcher = pattern.matcher(operation);
+        if (Context.shouldContinue()) {
+            final String regex = "(\\+\\+)|(--)|(\\+-)|(-\\+)";
+//            final String SpecialOperatorRegex = "(\\d+\\*\\-\\d+)";
+            final Matcher matcher = Pattern.compile(regex, Pattern.MULTILINE).matcher(operation);
+//            final Matcher SpecialOperatorMatcher = Pattern.compile(SpecialOperatorRegex, Pattern.MULTILINE).matcher(operation);
 
-        while (matcher.find()) {
-            System.out.println("Full match: " + matcher.group(0));
-                   operation = operation.replace("+-", "-").replace("-+", "-");
-                   operation = operation.replace("++", "+").replace("--", "+");
+            while (matcher.find()) {
+                operation = operation.replace("+-", "-").replace("-+", "-");
+                operation = operation.replace("++", "+").replace("--", "+");
+            }
+
+
         }
-            System.out.println(operation);
         return this.nextInChain.handle(operation);
     }
 }

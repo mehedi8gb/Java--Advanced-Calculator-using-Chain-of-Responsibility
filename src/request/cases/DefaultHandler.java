@@ -2,7 +2,7 @@ package request.cases;
 
 import request.IRequest;
 
-public class braceCaseHandler  implements IRequest {
+public class DefaultHandler implements IRequest {
     private IRequest nextInIRequest;
     @Override
     public void setNext(IRequest nextIRequest) {
@@ -11,6 +11,6 @@ public class braceCaseHandler  implements IRequest {
 
     @Override
     public String handle(String expression) {
-        return null;
+        return expression;
     }
 }

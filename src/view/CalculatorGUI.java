@@ -2,33 +2,28 @@ package view;
 
 import javax.swing.*;
 import controller.Calculator;
-import java.awt.event.*;
 
-public class CalculatorGUI extends JFrame{
-        JPanel panel;
-        JTextField textField;
-        JLabel resultLabel;
+public class CalculatorGUI extends JFrame {
+    private JTextField textField;
+    private JLabel resultLabel;
 
     public CalculatorGUI() {
-        this.panel = new JPanel();
+        JPanel panel = new JPanel();
+        Calculator calculator = new Calculator();
+        textField = new JTextField(20);
+        resultLabel = new JLabel("Result: 0.000");
 
-        this.textField = new JTextField(20);
-        this.resultLabel = new JLabel("Result: 0.00000");
-
-        final JButton calculateButton = new JButton("Calculate");
-        calculateButton.addActionListener(new ActionListener() {
-            public void actionPerformed(final ActionEvent e) {
-                final Calculator calculator = new Calculator();
-                calculator.calculate(CalculatorGUI.this.textField.getText());
-                CalculatorGUI.this.resultLabel.setText("Result: " + Double.toString(calculator.getFloatResult()));
-            }
+        JButton calculateButton = new JButton("Calculate");
+        calculateButton.addActionListener(e -> {
+            calculator.calculate(textField.getText());
+            resultLabel.setText("Result: " + Double.toString(calculator.getFloatResult()));
         });
 
-        this.panel.add(this.textField);
-        this.panel.add(calculateButton);
-        this.panel.add(this.resultLabel);
+        panel.add(textField);
+        panel.add(calculateButton);
+        panel.add(resultLabel);
 
-        add(this.panel);
+        add(panel);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         pack();
         setLocationRelativeTo(null);
