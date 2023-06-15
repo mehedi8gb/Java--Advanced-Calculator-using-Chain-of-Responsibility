@@ -1,12 +1,12 @@
-import view.CalculatorGUI;
+import view.GUI;
 
 public class App {
     public static void main(String[] args) {
-            new CalculatorGUI();
+            new GUI();
     }
 }
 
 
 // Usage
-// Calculator calculator = new Calculator();
-// calculator.calculate("1-2/3+6*10");
+// Calculator app = new Calculator();
+// app.calculate("1-2/3+6*10");

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CalculatorAdv - new method.iml" filepath="$PROJECT_DIR$/CalculatorAdv - new method.iml" />
+     <module filepath="$PROJECT_DIR$/Java Advanced Calculator using Chain of Responsibility.iml" />
     </modules>
   </component>
 </project>

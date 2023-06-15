@@ -1,13 +1,13 @@
 import static org.junit.jupiter.api.Assertions.*;
 
-import controller.Calculator;
+import controller.app.Calculator;
 import org.junit.Test;
 
 public class CalculatorTest {
         Calculator calc = new Calculator();
     @Test
     public void testTrigonometryFunctions() {
-        assertEquals(-1.106, calc.calculate("sin(10+sin(60))+cos(10)"), 0.001);
+        assertEquals(-0.485, calc.calculate("sin(sin(10^2))"), 0.001);
         assertEquals(-0.267, calc.calculate("sin(10+sin(60))"), 0.001);
         assertEquals(0.0, calc.calculate("sin(60)"), 0.001);
         assertEquals(-0.448, calc.calculate("cos((90+10)-(50-40))"), 0.001);
