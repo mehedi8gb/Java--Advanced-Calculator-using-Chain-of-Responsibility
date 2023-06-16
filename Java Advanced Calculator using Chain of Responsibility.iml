@@ -9,6 +9,7 @@
     <orderEntry type="jdk" jdkName="19" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="lib" level="project" />
+<<<<<<< HEAD
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit5.8.1">
         <CLASSES>
@@ -25,5 +26,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+=======
+>>>>>>> origin/nonstable-1.0.12
   </component>
 </module>
