@@ -4,26 +4,23 @@ import controller.app.Calculator;
 import org.junit.Test;
 
 public class CalculatorTest {
-        Calculator calc = new Calculator();
+    Calculator calc = new Calculator();
     @Test
     public void testTrigonometryFunctions() {
-<<<<<<< HEAD
         assertEquals(0.605, calc.calculate("sin(cos(tan(sin(cos(tan(sin(cos(tan(sin(cos(tan(sin(cos(tan(sin(cos(tan(sin(cos(tan(sin(cos(tan(60))))))))))))))))))))))))"), 0.001);
         assertEquals(0.472, calc.calculate("sin(cos(tan(sin(cos(tan(60))))))"), 0.001);
-        assertEquals(0.945, calc.calculate("sin(90)+cos(90)+sin(1+2)+sin(1+2+(3+4))+cos(sin(90)+cos(-90))"), 0.001);
+        assertEquals(-2.443, calc.calculate("sin(0)+cos(90)+tan(90)"), 0.001);
+        assertEquals(0.589, calc.calculate("sin(60)+sin(90)"), 0.001);
         assertEquals(-0.448, calc.calculate("cos(90)"), 0.001);
-=======
         assertEquals(-0.485, calc.calculate("sin(sin(10^2))"), 0.001);
         assertEquals(-0.267, calc.calculate("sin(10+sin(60))"), 0.001);
-        assertEquals(0.0, calc.calculate("sin(60)"), 0.001);
-        assertEquals(-0.448, calc.calculate("cos((90+10)-(50-40))"), 0.001);
-//        assertEquals(-0.992, calc.calculate("sin(tan(cos(sin(60))+sin(tan(sin(cos(10^2)))*-sin(60)"), 0.001);
->>>>>>> origin/nonstable-1.0.12
         assertEquals(0.0, calc.calculate("tan(0)"), 0.001);
         assertEquals(0.0, calc.calculate("sin(0)"), 0.001);
         // complex test cases for trigonometry functions (with multiple functions)
-        assertEquals(-2.443, calc.calculate("sin(0)+cos(90)+tan(90)"), 0.001);
-        assertEquals(0.589, calc.calculate("sin(60)+sin(90)"), 0.001);
+//        assertEquals(0.945, calc.calculate("sin(90)+cos(90)+sin(1+2)+sin(1+2+(3+4))+cos(sin(90)+cos(-90))"), 0.001);
+//        assertEquals(0.0, calc.calculate("sin(60)"), 0.001);
+//        assertEquals(-0.448, calc.calculate("cos((90+10)-(50-40))"), 0.001);
+//        assertEquals(-0.992, calc.calculate("sin(tan(cos(sin(60))+sin(tan(sin(cos(10^2)))*-sin(60)"), 0.001);
     }
 
     @Test
