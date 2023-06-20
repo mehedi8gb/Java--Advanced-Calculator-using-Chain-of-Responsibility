@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-     <module filepath="$PROJECT_DIR$/Java Advanced Calculator using Chain of Responsibility.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Java--Advanced-Calculator-using-Chain-of-Responsibility.iml" filepath="$PROJECT_DIR$/Java--Advanced-Calculator-using-Chain-of-Responsibility.iml" />
     </modules>
   </component>
 </project>
