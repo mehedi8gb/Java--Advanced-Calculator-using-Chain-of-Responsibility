@@ -55,7 +55,7 @@ jobs:
         # queries: security-extended,security-and-quality
 
     - name: Build with Java
-      run: javac src/Main.java
+      run: cd src && javac Main.java
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
